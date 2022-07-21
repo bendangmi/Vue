@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../Vue-js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <div>{{name}}</div>
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip=false
+    new Vue({
+        el:'#root',
+        data:function (){
+            return {name : '本当迷'}
+        }
+    })
+</script>
+</body>
+</html>
