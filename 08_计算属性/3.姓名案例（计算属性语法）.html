@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../Vue-js/vue.js"></script>
+  <!--  计算属性：
+            1.定义：要用的属性不存在,要通过已有属性计算得来
+            2.原理：底层借助了Object.defineproperty方法提供的getter和setter
+            3.get函数什么时候执行？
+                    （1）初次读取的时候会执行一次
+                    （2）当依赖的数据发生改变时会被再次调用
+            4.优势：与methods实现相比，内部有缓冲机制（复用），效率更高，调用方便
+            5.备注：
+                    （1）计算属性最终会出现再vm上，直接读取使用即可
+                    （2）如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变-->
+</head>
+<body>
+<div id="root">
+    <h1>{{name}}</h1>
+    <label>姓名
+        <input type="text" @keydown="showInfo($event)" v-model:value="name">
+    </label>
+    <br/>
+    <label>年龄
+        <input type="text" @keydown="showInfo($event)" v-model="age">
+    </label>
+    <hr/>
+    <h2>组合：{{fullName}}</h2>
+</div>
+<script type="text/javascript">
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            name: '本当迷',
+            age:18
+        },
+        computed:{
+            fullName:{
+                // get有什么作用：当有人读取fullName时，get就会被调用，且返回值就作为fullName的值。
+                // get什么时候调用：1.初次读取fullName时 2.所依赖的数据发生变化时。
+               get(){
+                   return this.name + "-" + this.age
+               },
+               // set什么时候调用？fullName被修改时。
+               set(value){
+                   let valueList = value.split('-')
+                   let name = valueList[0]
+                   let age = valueList[1]
+                   this.name = name
+                   this.age = age
+               }
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

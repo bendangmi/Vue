@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../Vue-js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h1>{{name}}</h1>
+    <label>姓名
+        <input type="text" @keydown="showInfo($event)" v-model:value="name">
+    </label>
+    <br/>
+    <label>年龄
+        <input type="text" @keydown="showInfo($event)" v-model="age">
+    </label>
+    <hr/>
+    <h2>组合：{{showInfo(name, age)}}</h2>
+</div>
+<script type="text/javascript">
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            name: '本当迷',
+            age:18
+        },
+        methods: {
+            showInfo(name, age){
+                name = name.substring(0, 3)
+                return name + "-" + age;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

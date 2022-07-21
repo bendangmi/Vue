@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 数据代理：通过一个对象代理对另一个对象中属性的操作（读/写）
+    let obj1 = {
+        x : 10
+    }
+    let obj2 = {
+        y : 20
+    }
+    Object.defineProperty(obj2, 'x', {
+        get(){
+            return obj1.x
+        },
+        set(value){
+          obj1.x=value
+        }
+    })
+
+    // 我们的Vue也是通过数据代理拿到data中的数据
+    let name
+    let _data = {
+        name : ''
+    }
+    Object.defineProperty(_data, 'name', {
+        get(){
+            return name
+        },
+        set(value){
+            name = value
+        }
+    })
+</script>
+
+</body>
+</html>
